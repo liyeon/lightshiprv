@@ -1,0 +1,19 @@
+// utils
+@import './utils/var';
+@import './utils/mixins';
+
+//base
+@import './base/font';
+@import './base/reset';
+@import './base/common';
+
+//components
+@import './components/buttons';
+@import './components/keyframes';
+
+//layout
+@import './layout/header';
+@import './layout/footer';
+
+//pages
+@import './pages/main';

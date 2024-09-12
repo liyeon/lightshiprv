@@ -1,0 +1,40 @@
+@keyframes loading{
+	from{
+    clip-path: polygon(0% 0%, 0% 100%, 5% 50%, 15% 50%, 95% 50%, 85% 50%, 0% 50%, 0% 100%, 100% 100%, 100% 0%);
+  }
+	to{
+    clip-path: polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0 100%, 100% 100%, 100% 0%)
+	}
+}
+
+@keyframes railHorizontal {
+  0% {
+    transform: translateX(0)
+  }
+
+  100% {
+    transform: translateX(-50%)
+  }
+}
+
+
+@mixin ScrollUp($factor) {
+  @keyframes scrollUp#{$factor} {
+    0% {
+      transform: translateY(0);
+    }
+
+    100% {
+      transform: translateY(calc(10px * #{$factor}));
+    }
+  }
+}
+
+@include ScrollUp(-1);
+@include ScrollUp(-2);
+@include ScrollUp(-3);
+@include ScrollUp(-4);
+@include ScrollUp(1);
+@include ScrollUp(2);
+@include ScrollUp(3);
+@include ScrollUp(4);

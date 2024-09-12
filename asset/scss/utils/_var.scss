@@ -1,0 +1,50 @@
+:root {
+	--grid-columns: 10;
+	--grid-gutter: 20px;
+	--grid-gutter-half: calc(0.5 * var(--grid-gutter));
+	--grid-margin: 15px;
+
+	--spacing-tiny-mobile: 20px;
+	--spacing-tiny: 20px;
+	--spacing-small-mobile: 30px;
+	--spacing-small: 30px;
+	--spacing-medium-mobile: 40px;
+	--spacing-medium: 40px;
+	--spacing-large-mobile: 52px;
+	--spacing-large: 80px;
+	--spacing-big-mobile: 80px;
+	--spacing-big: 150px;
+	--spacing-huge-mobile: 100px;
+	--spacing-huge: 200px;
+	--spacing-enormous-mobile: 140px;
+	--spacing-enormous: 250px;
+
+	--color-text: #000;
+	--color-background: #F4F4F4;
+	--color-contrast: #F9F9F9;
+	--color-border: #E8E8E8;
+	--color-footer: #E8E8E8;
+
+	--color-primary: #FA5C40;
+	--color-secondary: #29525E;
+	--color-white: #fff;
+
+	--header-height: 6.875rem;
+	--button-height: 3.3125rem;
+
+	--border-radius: 0.5rem;
+}
+
+@media (min-width: 700px) and (max-width: 999px) {
+	:root {
+		--grid-margin: 30px;
+		--border-radius: 0.75rem;
+	}
+}
+
+@media (min-width: 1000px) {
+	:root {
+		--grid-margin: 50px;
+		--border-radius: 0.5rem;
+	}
+}

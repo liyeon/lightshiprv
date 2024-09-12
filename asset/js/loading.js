@@ -1,0 +1,3 @@
+gsap.defaults({
+  ease: "none",
+});
