@@ -1,3 +1,21 @@
+.font {
+	&-f37 {
+		font-family: "F37Bolton";
+	}
+
+	&-sohn {
+		font-family: "SuisseIntlMono";
+	}
+
+	&-suis {
+		font-family: "SohneSchmal";
+	}
+}
+
+.bold {
+	font-weight: bold;
+}
+
 @font-face {
 	font-display: swap;
 	font-family: "F37Bolton";
@@ -37,3 +55,4 @@
 	font-weight: normal;
 	font-style: normal
 }
+

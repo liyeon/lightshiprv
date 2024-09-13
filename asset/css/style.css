@@ -43,6 +43,20 @@
     --border-radius: 0.5rem;
   }
 }
+.font-f37 {
+  font-family: "F37Bolton";
+}
+.font-sohn {
+  font-family: "SuisseIntlMono";
+}
+.font-suis {
+  font-family: "SohneSchmal";
+}
+
+.bold {
+  font-weight: bold;
+}
+
 @font-face {
   font-display: swap;
   font-family: "F37Bolton";
@@ -436,36 +450,9 @@ body {
   background: aqua;
   -webkit-transition: background 0.3s;
   transition: background 0.3s;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
 }
 body h1 {
   font-size: 4rem;
-}
-body h1:nth-child(1) {
-  font-family: F37Bolton;
-}
-body h1:nth-child(2) {
-  font-family: SuisseIntlMono;
-  font-weight: normal;
-}
-body h1:nth-child(3) {
-  font-family: SuisseIntlMono;
-  font-weight: bold;
-}
-body h1:nth-child(4) {
-  font-family: SohneSchmal;
 }
 @media (min-width: 500px) {
   body {

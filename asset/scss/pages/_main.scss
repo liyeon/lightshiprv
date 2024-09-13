@@ -3,23 +3,8 @@
 body{
   background: aqua;
   transition: background .3s;
-  @include column-flexbox;
   h1{
     font-size: 4rem;
-    &:nth-child(1){
-      font-family: F37Bolton;
-    }
-    &:nth-child(2){
-      font-family: SuisseIntlMono;
-      font-weight: normal;
-    }
-    &:nth-child(3){
-      font-family: SuisseIntlMono;
-      font-weight: bold;
-    }
-    &:nth-child(4){
-      font-family: SohneSchmal;
-    }
   }
   @include responsive('m') {
     background: #ff8888;
