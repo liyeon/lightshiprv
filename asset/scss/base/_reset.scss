@@ -15,10 +15,11 @@ html{
 }
 
 body {
-	line-height: 1.5;
+	line-height: 1.1;
 	font-family: "F37Bolton", -apple-system, arial, sans-serif;
 	color: #000;
-	background-color: var(--color-background);
+	background-color: $color-background;
+	transition: background .3s;
 }
 
 *,

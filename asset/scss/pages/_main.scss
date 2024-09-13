@@ -1,18 +1,128 @@
 //main
 
-body{
-  background: aqua;
-  transition: background .3s;
-  h1{
-    font-size: 4rem;
-  }
-  @include responsive('m') {
-    background: #ff8888;
-  }
+body {
+  @include responsive('m') {}
+
+  @include responsive('t') {}
+
+  @include responsive('d') {}
+}
+
+// 서브 메뉴
+.sub-menu {
+  @include column-flexbox(start, between);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 36rem;
+  transition: height .3s;
+
   @include responsive('t') {
-    background: #84ffbc;
+    height: 42rem;
   }
-  @include responsive('d') {
-    background: #84a1ff;
+
+  max-height: calc(100% - 60px);
+  background: #E8E8E8;
+  z-index: 5;
+  border-radius: 2.375rem 2.375rem 0 0;
+  padding: $grid-margin;
+
+  &__top {
+    width: 100%;
+    height: 11rem;
+    position: relative;
+    padding: $grid-gutter $grid-margin;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: calc(50% - 60px);
+      width: 120px;
+      height: 4px;
+      background-color: #d3d2cf;
+      border-radius: 4px;
+    }
+  }
+
+  &__logo {
+    @include pos-center-x;
+    margin: 1.42rem auto 0 auto;
+    width: 10.25rem;
+
+    svg {
+      width: 100%;
+      height: 50px;
+    }
+  }
+
+  &__bottom {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+
+    .card {
+      width: 11.6rem;
+      a{
+        @include column-flexbox(between,center);
+        aspect-ratio: 9/15;
+        background-image: url(../images/thumbnail.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        border-radius: $border-radius;
+        padding: .9375rem .9375rem 2.1875rem .9375rem;
+        width: 100%;
+      }
+      &__top {
+        @include flexbox(between, start);
+        width: 100%;
+        color: $color-white;
+
+        svg {
+          width: 27px;
+          height: 13px;
+          fill: $color-white;
+        }
+      }
+
+      &__title {
+        font-size: 2rem;
+      }
+
+      &__reserve {
+        border-radius: $border-radius;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 7.5rem;
+        height: $button-height;
+        background: #000;
+        color: $color-white;
+        overflow: hidden;
+        padding: 0 1.375rem;
+      }
+    }
+  }
+
+  &__list-wrap {}
+
+  &__list-title {
+    display: block;
+    margin-bottom: 3rem
+  }
+
+  &__list {}
+
+  &__item {
+    font-size: 2em;
+
+    &+& {
+      margin-top: 18px;
+    }
+
+    &-title {}
   }
 }
