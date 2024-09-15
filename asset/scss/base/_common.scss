@@ -29,7 +29,9 @@
 		width: clamp(160px, 13.88889vw, 350px);
 	}
 }
-
+body.dimmed{
+	overflow: hidden;
+}
 body.dimmed::after {
 	position: fixed;
 	top: 0;
@@ -38,4 +40,17 @@ body.dimmed::after {
 	bottom: 0;
 	background: rgba(0, 0, 0, .8);
 	content: '';
+}
+
+.hide-mb{
+	display: none;
+	@include responsive('t'){
+		display: block;
+	}
+}
+.hide-tb{
+	display: block;
+	@include responsive('t'){
+		display: none;
+	}
 }

@@ -1,6 +1,6 @@
 // utils
-@import './utils/var';
 @import './utils/mixins';
+@import './utils/var';
 
 //base
 @import './base/font';
@@ -13,6 +13,7 @@
 
 //layout
 @import './layout/header';
+@import './layout/header-sub';
 @import './layout/footer';
 
 //pages
