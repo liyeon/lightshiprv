@@ -192,15 +192,15 @@
       }
     }
 
-    &:hover .sub-menu__video--watch span:first-child {
+    &:hover .sub-menu__video-watch span:first-child {
       transform: translateY(-100%);
     }
 
-    &:hover .sub-menu__video--watch span:last-child {
+    &:hover .sub-menu__video-watch span:last-child {
       transform: translateY(0);
     }
 
-    &--watch {
+    &-watch {
       @include pos-center-y;
       display: flex;
       justify-content: center;
