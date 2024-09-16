@@ -8,7 +8,7 @@
 html{
 	font-size: 14px;
 	transition: font-size .3s;
-	font-weight: 400;
+	font-weight: normal;
 	@include responsive('d'){
 		font-size: 15px;
 	}

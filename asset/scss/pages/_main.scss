@@ -5,26 +5,194 @@
     margin-left: var(--grid-margin);
   }
 }
+
+//trip
+.trip {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  @include responsive('d'){
+    flex-direction: row;
+  }
+  &__card {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    position: relative;
+    @include responsive('d'){
+      width: 100%;
+      height: 27.5rem;
+      transition: width .3s;
+      &:hover{
+        &::before{
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: var(--trip-color);
+          z-index: 1;
+        }
+        width: 200%;
+        .headline{
+          transform: translateY(0);
+        }
+        .desc,.icon-right{
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+        }
+        .trip__card-info{
+          justify-content: end;
+          transform: translateY(0);
+        }
+      }
+    }
+    &-explore {
+      --trip-color: #29525E;
+      .trip__card-info{
+        --trip-color: #29525E;
+      }
+    }
+
+    &-reserve {
+      --trip-color: #FA5C40;
+      .trip__card-info{
+        --trip-color: #FA5C40;
+      }
+    }
+
+    &-thumb {
+      aspect-ratio: 5/3;
+      flex: 1;
+      @include responsive('d'){
+        aspect-ratio: unset;
+        width: 100%;
+        height: 100%;
+      }
+      position: relative;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: #000;
+        opacity: 0.1;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &-info {
+      flex: 1;
+      padding: 1.875rem 1.5625rem;
+      @include column-flexbox(between, start);
+      height: 100%;
+      color: #fff;
+      @include responsive('d'){
+        justify-content: start;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1;
+        padding: 2rem;
+        transform: translateY(100%);
+        transition: transform .3s;
+      }
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        background-color: var(--trip-color);
+        @include responsive('d'){
+          background-color: transparent;
+        }
+      }
+
+      .headline {
+        font-size: 2.025rem;
+        margin-bottom: 1.875rem;
+
+        @include responsive('t') {
+          font-size: 2.3625rem;
+        }
+
+        @include responsive('d') {
+          font-size: 3.375rem;
+          max-width: 16rem;
+          transition: transform .3s;
+          transform: translateY(-150%);
+        }
+      }
+
+      .desc {
+        max-width: 18.75rem;
+        margin-bottom: 2.5rem;
+        font-size: 1.3rem;
+        line-height: 1.4;
+        
+
+        @include responsive('d') {
+          font-size: 1.625rem;
+        }
+      }
+
+      .icon-right {
+        @include flexbox;
+        background-color: #fff;
+        width: 3.125rem;
+        height: 3.125rem;
+        border-radius: 100%;
+        overflow: hidden;
+        color: #000;
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+  }
+}
+
+.company {
 //company
-.company{
   margin-top: 2.5rem;
   padding: 1.25rem;
   border-radius: var(--border-radius);
   background-color: $color-contrast;
-  @include responsive('t'){
+
+  @include responsive('t') {
     display: grid;
-    grid-template-columns: repeat($grid-columns,1fr);
+    grid-template-columns: repeat($grid-columns, 1fr);
     gap: 20px;
   }
-  &__top{
+
+  &__top {
     grid-column: 1/5;
-    @include column-flexbox(start,start);
+    @include column-flexbox(start, start);
     margin-top: 1.25rem;
     margin-bottom: 3.75rem;
-    @include responsive('t'){
+
+    @include responsive('t') {
       padding: 3.1771rem 2.1875rem 0;
     }
   }
+
   .link__about {
     margin-top: 3.125rem;
     min-width: 9.375rem;
@@ -35,6 +203,7 @@
     border: 1px solid #000;
     border-radius: var(--border-radius);
     background: transparent;
+
     &>span {
       @include flexbox;
       width: 100%;
@@ -54,13 +223,13 @@
       transition: .4s;
       transform: translateY(101%);
     }
-    
+
     &:hover {
       .link__about-title {
         opacity: 0;
         transform: translateY(-100%);
       }
-      
+
       .link__about-inner {
         opacity: 1;
         transform: translateY(0);
@@ -70,26 +239,32 @@
       }
     }
   }
-  &__text{
+
+  &__text {
     word-break: break-all;
-    font-size:1.425rem;
+    font-size: 1.425rem;
     margin-top: 3rem;
-    @include responsive('t'){
-      font-size:1.6625rem
+
+    @include responsive('t') {
+      font-size: 1.6625rem
     }
-    @include responsive('d'){
-      font-size:2.375rem
+
+    @include responsive('d') {
+      font-size: 2.375rem
     }
   }
-  &__desc{
+
+  &__desc {
     margin-top: 2.8rem;
-    line-height: 1.5;    
+    line-height: 1.5;
   }
-  &__bottom{
-    grid-column:6/11;
+
+  &__bottom {
+    grid-column: 6/11;
     overflow: hidden;
     border-radius: var(--border-radius);
-    img{
+
+    img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -101,29 +276,32 @@
 .journal {
   margin: 6.25rem 0;
   overflow-x: hidden;
+
   &__top {
     display: grid;
     align-items: center;
     gap: 1.25rem;
     margin-bottom: 2.5rem;
-    &-heading{
+
+    &-heading {
       grid-column: 1/8;
       display: flex;
       align-items: flex-end;
       gap: 1.25rem;
     }
+
     .headline {
       font-size: 1.425rem;
-      
+
       @include responsive('t') {
         font-size: 1.6625rem;
       }
-      
+
       @include responsive('d') {
         font-size: 2.375rem;
       }
     }
-    
+
     .link__articles {
       @include flexbox;
       overflow: hidden;
@@ -135,7 +313,7 @@
       padding: 0 .875rem;
       height: 2rem;
       min-width: unset;
-      
+
       &>span {
         @include flexbox;
         width: 100%;
@@ -174,14 +352,17 @@
 
     .swiper-pagination {
       grid-column: 8/11;
-      &.swiper-pagination-progressbar.swiper-pagination-horizontal{
+
+      &.swiper-pagination-progressbar.swiper-pagination-horizontal {
         height: .125rem;
       }
+
       position: relative;
       background-color: transparent;
 
       &::before {
         content: '';
+        display: block;
         position: absolute;
         top: 50%;
         left: 0;
@@ -202,6 +383,7 @@
   .swiper-slide {
     display: grid;
     gap: 1.25rem;
+
     &:hover {
       img {
         scale: 1.05;
@@ -228,6 +410,7 @@
     &__info {
       display: grid;
       gap: 1.4rem;
+
       &-title {
         padding-right: 20%;
         font-size: 1.2375rem;
