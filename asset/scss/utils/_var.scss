@@ -51,6 +51,5 @@ $border-radius: 0.5rem;
 @include responsive('d') {
   :root {
     --grid-margin: 50px;
-    --border-radius: 0.5rem;
   }
 }
