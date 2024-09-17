@@ -11,10 +11,6 @@
     main {
       padding-top: 500px;
     }
-
-    .test {
-      height: 100vh;
-    }
   </style>
   <!-- splite -->
   <!-- gsap -->
@@ -23,7 +19,6 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <!-- jquery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="../../asset/js/splite.js" defer></script>
 </head>
 
 <body>
@@ -34,13 +29,17 @@
         <div class="trailer__cover__wrap"><img src="../../asset/images/video-cover.jpg" alt></div>
       </div>
       <div class="trailer__video">
-        <video id="bgVideo" muted>
-          <source src="../../asset/video/main.mp4" type="video/mp4" />
-        </video>
-        <p data-scroll-video-time="1,6">Integrated solar and all-electric everything.</p>
-        <p data-scroll-video-time="7,10.5">Bright, open spaces.</p>
-        <p data-scroll-video-time="12,18">Endless views.</p>
-        <p data-scroll-video-time="23,27.5">Camp Mode to Road Mode at the press of a button</p>
+        <div class="sticky__wrap">
+          <div class="sticky">
+            <video id="bgVideo" muted>
+              <source src="../../asset/video/main.mp4" type="video/mp4" />
+            </video>
+            <p data-scroll-video-time="1,6">Integrated solar and all-electric everything.</p>
+            <p data-scroll-video-time="7,10.5">Bright, open spaces.</p>
+            <p data-scroll-video-time="12,18">Endless views.</p>
+            <p data-scroll-video-time="23,27.5">Camp Mode to Road Mode at the press of a button</p>
+          </div>
+        </div>
       </div>
       <div class="trailer__video-mobile">
         <video muted loop>
@@ -51,7 +50,6 @@
         </p>
       </div>
     </section>
-    <section class="test"> 글자!!</section>
   </main>
 
   <script>
@@ -59,6 +57,14 @@
       ease: "none"
     })
     // Split text into words and characters
+    ScrollTrigger.create({
+      trigger: ".trailer",
+      start: "top 50%",
+      scrub: 1,
+      onEnter: () => {
+        animateText(".trailer .headline");
+      },
+    })
     let mm = gsap.matchMedia();
     mm.add("(max-width: 999px)", () => {
       ScrollTrigger.create({
@@ -75,20 +81,12 @@
       });
     });
     mm.add("(min-width: 1000px)", () => {
-      ScrollTrigger.create({
-        trigger: ".trailer",
-          start: "top 50%",
-          scrub: 1,
-          onEnter: () => {
-            animateText(".trailer .headline");
-          },
-      })
       const trailerCover = gsap.timeline({
         scrollTrigger: {
           trigger: ".trailer__cover",
-          start: "top 0%",
+          start: "top top",
           end: "bottom bottom",
-          markers:true,
+          markers: true,
           scrub: 1,
           anticipatePin: 1,
           invalidateOnRefresh: true,
@@ -112,16 +110,16 @@
         scrollTrigger: {
           trigger: '.trailer__video',
           start: 'top top',
-          end: '+=600%',
+          end: 'bottom bottom',
           scrub: 10,
-          pin: true,
-          anticipatePin: 1,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
             const scrollPercent = self.progress;
             const videoDuration = video.duration;
             const currentTime = scrollPercent * videoDuration;
-            video.currentTime = currentTime;
+            if (currentTime) {
+              video.currentTime = currentTime;
+            }
 
             texts.forEach(text => {
               const [start, end] = text.getAttribute('data-scroll-video-time').split(',').map(Number);
@@ -133,8 +131,17 @@
               }
             });
           },
-          onComplete: () => {
-            gsap.to(".trailer__video", { clipPath: "inset(0px 50px round 0.75rem)", duration: 1 });
+          onEnter: () => {
+            $('.trailer__video').removeClass('clip');
+          },
+          onLeave: () => {
+            $('.trailer__video').addClass('clip');
+          },
+          onEnterBack: () => {
+            $('.trailer__video').removeClass('clip');
+          },
+          onLeaveBack: () => {
+            $('.trailer__video').addClass('clip');
           }
         }
       });
