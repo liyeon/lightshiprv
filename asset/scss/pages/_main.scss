@@ -6,6 +6,109 @@
   }
 }
 
+// star
+.star {
+  --scaling-value: 0.605;
+  .headline {
+    font-size: 1.65rem;
+    text-align: center;
+
+    @include responsive('t') {
+      font-size: 1.925rem
+    }
+
+    @include responsive('d') {
+      font-size: 2.75rem;
+    }
+    margin-right: var(--grid-margin);
+    margin-left: var(--grid-margin);
+    padding-bottom: clamp(calc(0.0625rem * #{$spacing-large-mobile}),
+      calc(#{$spacing-large} / 14.4 * 1vw),
+      calc(0.0625rem * #{$spacing-large}));
+
+    padding-top: clamp(calc(0.0625rem * #{$spacing-small-mobile}),
+      calc(#{$spacing-small} / 14.4 * 1vw),
+      calc(0.0625rem * #{$spacing-small}));
+
+  }
+
+  &__wrap {
+    width: 100%;
+    height: 700vh;
+    position: relative;
+    .sticky__wrap{
+      height: 700vh;
+      .sticky{
+        @include flexbox;
+      }
+    }
+  }
+
+  &__video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    mask-image: url(../images/star.svg);
+    mask-repeat: no-repeat;
+    mask-position: center;
+    overflow: hidden;
+    mask-size: calc(100%* var(--scaling-value));
+    @include responsive('t'){
+      mask-size: auto calc(100%* var(--scaling-value));
+
+    }
+    z-index: 5;
+    video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  &__shape {
+    &__wrap{
+      width: 100%;
+      height: 100%;
+      display: flex;
+        justify-content: center;
+        align-items: center;
+      
+    }
+    position: absolute;
+    width: calc(100%* var(--scaling-value));
+    height: calc(100%* var(--scaling-value));
+    @include responsive('t'){
+      width: auto;
+    }
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    &-1 {
+      color: #FA5C40;
+      z-index: 4;
+    }
+
+    &-2 {
+      color: #C4A173;
+      z-index: 3;
+    }
+
+    &-3 {
+      color: #FAF6EF;
+      z-index: 2;
+    }
+
+    &-4 {
+      color: #E0DBD4;
+      z-index: 1;
+    }
+  }
+}
+
 //trailer
 .trailer {
   position: relative;
@@ -31,15 +134,18 @@
 
   &__cover {
     display: none;
+
     @include responsive('d') {
       display: block;
     }
+
     position: absolute;
     width: 100%;
     height: 100vh;
     overflow: hidden;
     z-index: 1;
     background: $color-background;
+
     &__wrap {
       position: absolute;
       top: 0;
@@ -57,18 +163,23 @@
 
   &__video {
     display: none;
+
     @include responsive('d') {
       display: block;
     }
+
     width: 100%;
     height: 700vh;
-    &.clip{
+
+    &.clip {
       transition: clip-path .5s;
       clip-path: inset(0px 50px round 0.75rem);
     }
-    .sticky__wrap{
+
+    .sticky__wrap {
       height: 700vh;
     }
+
     p {
       @include pos-center;
       z-index: 5;

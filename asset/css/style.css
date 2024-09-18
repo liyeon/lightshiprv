@@ -1489,6 +1489,120 @@ body.dimmed::after {
   margin-left: var(--grid-margin);
 }
 
+.star {
+  --scaling-value: 0.605;
+}
+.star .headline {
+  font-size: 1.65rem;
+  text-align: center;
+  margin-right: var(--grid-margin);
+  margin-left: var(--grid-margin);
+  padding-bottom: clamp(0.0625rem * 52, 80 / 14.4 * 1vw, 0.0625rem * 80);
+  padding-top: clamp(0.0625rem * 30, 30 / 14.4 * 1vw, 0.0625rem * 30);
+}
+@media (min-width: 700px) {
+  .star .headline {
+    font-size: 1.925rem;
+  }
+}
+@media (min-width: 1000px) {
+  .star .headline {
+    font-size: 2.75rem;
+  }
+}
+.star__wrap {
+  width: 100%;
+  height: 700vh;
+  position: relative;
+}
+.star__wrap .sticky__wrap {
+  height: 700vh;
+}
+.star__wrap .sticky__wrap .sticky {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.star__video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-mask-image: url(../images/star.svg);
+          mask-image: url(../images/star.svg);
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+          mask-position: center;
+  overflow: hidden;
+  -webkit-mask-size: calc(100% * var(--scaling-value));
+          mask-size: calc(100% * var(--scaling-value));
+  z-index: 5;
+}
+@media (min-width: 700px) {
+  .star__video {
+    -webkit-mask-size: auto calc(100% * var(--scaling-value));
+            mask-size: auto calc(100% * var(--scaling-value));
+  }
+}
+.star__video video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.star__shape {
+  position: absolute;
+  width: calc(100% * var(--scaling-value));
+  height: calc(100% * var(--scaling-value));
+}
+.star__shape__wrap {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+@media (min-width: 700px) {
+  .star__shape {
+    width: auto;
+  }
+}
+.star__shape svg {
+  width: 100%;
+  height: 100%;
+}
+.star__shape-1 {
+  color: #FA5C40;
+  z-index: 4;
+}
+.star__shape-2 {
+  color: #C4A173;
+  z-index: 3;
+}
+.star__shape-3 {
+  color: #FAF6EF;
+  z-index: 2;
+}
+.star__shape-4 {
+  color: #E0DBD4;
+  z-index: 1;
+}
+
 .trailer {
   position: relative;
   text-align: center;
