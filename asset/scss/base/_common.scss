@@ -29,8 +29,12 @@
 		width: clamp(160px, 13.88889vw, 350px);
 	}
 }
+body{
+	transition: opacity .6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
 body.dimmed{
 	overflow: hidden;
+	opacity: 1;
 }
 body.dimmed::after {
 	position: fixed;
@@ -39,6 +43,7 @@ body.dimmed::after {
 	right: 0;
 	bottom: 0;
 	background: rgba(0, 0, 0, .8);
+	opacity: 1;
 	content: '';
 }
 

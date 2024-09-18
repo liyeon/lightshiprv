@@ -2,24 +2,37 @@
 
 // 서브 메뉴
 .sub-menu {
+  --height:0;
   @include column-flexbox(start, between);
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  transition: height .3s;
+  transition: transform .6s cubic-bezier(0.165, 0.84, 0.44, 1);
   overflow-y: auto;
-
   max-height: calc(100% - 60px);
   background: #E8E8E8;
   z-index: 5;
   border-radius: 2.375rem 2.375rem 0 0;
   padding: var(--grid-margin);
-
+  transform: translateY(101%);
+  opacity: 0;
   @include responsive('t') {
-    height: 100%;
+    top: 0;
+    transform: translateY(-101%);
     max-height: 100%;
     border-radius: 0;
+    height:var(--height);
+    overflow-y:hidden;
+  }
+  &.on{
+    transform: translateY(0);
+    opacity: 1;
+    @include responsive('t'){
+      --height:100%;
+      top: 0;
+    }
+    color: #000;
   }
 
   &__top {
