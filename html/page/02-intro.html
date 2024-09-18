@@ -6,14 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>02-intro</title>
   <link rel="stylesheet" href="../../asset/css/style.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../asset/images/favicon-32x32.png">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <style>
-    body{
-      height: 1000vh;
-      background: url(../../asset/images/intro.jpg) no-repeat center center;
-      background-color: aquamarine;
-    }
-  </style>
 </head>
 
 <body>
@@ -90,6 +84,37 @@
       </a>
     </div>
   </header>
+  <main class="main">
+    <section class="intro">
+      <a href="#" class="logo__mobile">
+        <span class="blind">Lightship</span>
+        <svg class="o-icon -logo-header" aria-hidden="true">
+          <use xlink:href="../../asset/images/sprite.svg#logo"></use>
+        </svg>
+      </a>
+      <div class="inner">
+        <h2 class="headline">Moving road trips to the electric age.</h2>
+        <div class="intro__video">
+          <video src="../../asset/video/mini.mp4"></video>
+          <button class="btn-play">
+            <span class="blind">재생버튼</span>
+            <svg class="btn-play_svg" aria-hidden="true">
+              <use xlink:href="../../asset/images/sprite.svg#play-round"></use>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="intro__scroll">
+        <svg aria-hidden="true">
+          <use xlink:href="../../asset/images/sprite.svg#arrow-small-down"></use>
+        </svg>
+        <p>Scroll to explore</p>
+      </div>
+      <div class="intro__bg">
+        <img src="../../asset/images/intro.jpg" alt>
+      </div>
+    </section>
+  </main>
   <script>
     $(window).scroll(function (e) {
       const scrollTop = $(this).scrollTop();
