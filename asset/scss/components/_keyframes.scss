@@ -76,24 +76,3 @@
   }
 }
 
-
-@mixin ScrollUp($factor) {
-  @keyframes scrollUp#{$factor} {
-    0% {
-      transform: translateY(0);
-    }
-
-    100% {
-      transform: translateY(calc(10px * #{$factor}));
-    }
-  }
-}
-
-@include ScrollUp(-1);
-@include ScrollUp(-2);
-@include ScrollUp(-3);
-@include ScrollUp(-4);
-@include ScrollUp(1);
-@include ScrollUp(2);
-@include ScrollUp(3);
-@include ScrollUp(4);

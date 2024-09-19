@@ -1,6 +1,7 @@
 gsap.defaults({
-  ease: "none"
-})
+  ease: "none",
+});
+$('.menu-toggler_icon_item.-close').hide();
 
 window.onload = function () {
   const loadingLogoElement = $("#loadingLogo");
@@ -13,25 +14,46 @@ window.onload = function () {
     loop: false,
     autoplay: true,
     path: animationPath, // JSON 파일 경로
-  });//lottie load 
+  }); //lottie load
 
   // Lottie 완료 후 실행
   loadingAnimation.addEventListener("complete", function () {
     $(".loading").css("animation", "loading 1s forwards");
-  });//loadingAnimation
+  }); //loadingAnimation
   $(".loading").one("animationend", function () {
     $(this).remove();
-    $('.menu').click(function (e) {
-			$('.sub-menu').addClass('on');
-			$('body').addClass('dimmed');
-		});
-		$(document).click(function (e) { // 문서 내에 클릭 이벤트 발생할때 실행
-			console.log(e.target); // 클릭된 요소 콘솔에 출력
-			if (!$('header').has(e.target).length) { // 클릭된 요소를 자식으로 포함하고 있는지
-				$('.sub-menu').removeClass('on');
-				$('body').removeClass('dimmed');
-			}
-		});
+    $('.intro__scroll').css('--transform','scale3d(1, 1, 1)');
+    animateText(".intro .headline");
+    animateText(".intro__scroll p");
+    $(".menu-toggler").on("click", function () {
+      if (!$('.header').find('.sub-menu').hasClass("on")) {
+        $(this).addClass('active');
+        $('.menu-toggler_icon_item.-open').hide();
+        $('.menu-toggler_icon_item.-close').show();
+        $(".sub-menu").addClass("on");
+        $(".menu-toggler_label_item").addClass("open");
+        $("body").addClass("dimmed");
+      } else {
+        $(this).removeClass('active');
+        $('.menu-toggler_icon_item.-open').show();
+        $('.menu-toggler_icon_item.-close').hide();
+        $(".sub-menu").removeClass("on");
+        $(".menu-toggler_label_item").removeClass("open");
+        $("body").removeClass("dimmed");
+      }
+    });
+    $(document).click(function (e) {
+      // 문서 내에 클릭 이벤트 발생할때 실행
+      console.log(e.target); // 클릭된 요소 콘솔에 출력
+      if (!$("header").has(e.target).length) {
+        // 클릭된 요소를 자식으로 포함하고 있는지
+        $(".sub-menu").removeClass("on");
+        $("body").removeClass("dimmed");
+        $('.menu-toggler_icon_item.-open').show();
+        $('.menu-toggler_icon_item.-close').hide();
+        $(".menu-toggler_label_item").removeClass("open");
+      }
+    });
     $(window).scroll(function (e) {
       const scrollTop = $(this).scrollTop();
       // console.log(scrollTop)
@@ -40,7 +62,7 @@ window.onload = function () {
       } else {
         $("header").removeClass("scroll");
       }
-    })
+    });
     //star
     let lastProgress = 0;
     const starShape = gsap.timeline({
@@ -55,113 +77,111 @@ window.onload = function () {
           console.log(currentProgress);
           if (currentProgress > lastProgress) {
             // console.log(`스크롤 위로`);
-            gsap.to('.star__shape-1', {
-              y: currentProgress + (40), // 잠깐 위로 이동
+            gsap.to(".star__shape-1", {
+              y: currentProgress + 40, // 잠깐 위로 이동
               duration: currentProgress, // 이동 시간
               ease: "power1.inOut",
               onComplete: () => {
-                gsap.to('.star__shape-1', {
+                gsap.to(".star__shape-1", {
                   y: 0, // 원래 위치로 돌아감
                   duration: 0.1,
-                  ease: "power1.inOut"
+                  ease: "power1.inOut",
                 });
-              }
+              },
             });
-            gsap.to('.star__shape-2', {
-              y: currentProgress + (80), // 잠깐 위로 이동
+            gsap.to(".star__shape-2", {
+              y: currentProgress + 80, // 잠깐 위로 이동
               duration: currentProgress, // 이동 시간
               ease: "power1.inOut",
               onComplete: () => {
-                gsap.to('.star__shape-2', {
+                gsap.to(".star__shape-2", {
                   y: 0, // 원래 위치로 돌아감
                   duration: 0.1,
-                  ease: "power1.inOut"
+                  ease: "power1.inOut",
                 });
-              }
+              },
             });
-            gsap.to('.star__shape-3', {
-              y: currentProgress + (120), // 잠깐 위로 이동
+            gsap.to(".star__shape-3", {
+              y: currentProgress + 120, // 잠깐 위로 이동
               duration: currentProgress, // 이동 시간
               ease: "power1.inOut",
               onComplete: () => {
-                gsap.to('.star__shape-4', {
+                gsap.to(".star__shape-4", {
                   y: 0, // 원래 위치로 돌아감
                   duration: 0.1,
-                  ease: "power1.inOut"
+                  ease: "power1.inOut",
                 });
-              }
+              },
             });
-            gsap.to('.star__shape-4', {
-              y: currentProgress + (160), // 잠깐 위로 이동
+            gsap.to(".star__shape-4", {
+              y: currentProgress + 160, // 잠깐 위로 이동
               duration: currentProgress, // 이동 시간
               ease: "power1.inOut",
               onComplete: () => {
-                gsap.to('.star__shape-3', {
+                gsap.to(".star__shape-3", {
                   y: 0, // 원래 위치로 돌아감
                   duration: 0.1,
-                  ease: "power1.inOut"
+                  ease: "power1.inOut",
                 });
-              }
+              },
             });
           } else if (currentProgress < lastProgress) {
             // console.log(`스크롤 위로`);
-            gsap.to('.star__shape-1', {
-              y: currentProgress + (-40), // 잠깐 위로 이동
+            gsap.to(".star__shape-1", {
+              y: currentProgress + -40, // 잠깐 위로 이동
               duration: currentProgress, // 이동 시간
               ease: "power1.inOut",
               onComplete: () => {
-                gsap.to('.star__shape-1', {
+                gsap.to(".star__shape-1", {
                   y: 0, // 원래 위치로 돌아감
                   duration: 0.1,
-                  ease: "power1.inOut"
+                  ease: "power1.inOut",
                 });
-              }
+              },
             });
-            gsap.to('.star__shape-2', {
-              y: currentProgress + (-80), // 잠깐 위로 이동
+            gsap.to(".star__shape-2", {
+              y: currentProgress + -80, // 잠깐 위로 이동
               duration: currentProgress, // 이동 시간
               ease: "power1.inOut",
               onComplete: () => {
-                gsap.to('.star__shape-2', {
+                gsap.to(".star__shape-2", {
                   y: 0, // 원래 위치로 돌아감
                   duration: 0.1,
-                  ease: "power1.inOut"
+                  ease: "power1.inOut",
                 });
-              }
+              },
             });
-            gsap.to('.star__shape-3', {
-              y: currentProgress + (-120), // 잠깐 위로 이동
+            gsap.to(".star__shape-3", {
+              y: currentProgress + -120, // 잠깐 위로 이동
               duration: currentProgress, // 이동 시간
               ease: "power1.inOut",
               onComplete: () => {
-                gsap.to('.star__shape-4', {
+                gsap.to(".star__shape-4", {
                   y: 0, // 원래 위치로 돌아감
                   duration: 0.1,
-                  ease: "power1.inOut"
+                  ease: "power1.inOut",
                 });
-              }
+              },
             });
-            gsap.to('.star__shape-4', {
-              y: currentProgress + (-160), // 잠깐 위로 이동
+            gsap.to(".star__shape-4", {
+              y: currentProgress + -160, // 잠깐 위로 이동
               duration: currentProgress, // 이동 시간
               ease: "power1.inOut",
               onComplete: () => {
-                gsap.to('.star__shape-3', {
+                gsap.to(".star__shape-3", {
                   y: 0, // 원래 위치로 돌아감
                   duration: 0.1,
-                  ease: "power1.inOut"
+                  ease: "power1.inOut",
                 });
-              }
+              },
             });
           }
 
           // 상태 업
           lastProgress = currentProgress;
         },
-      }
+      },
     });
-
-
 
     const starVideo = document.getElementById("starVideo");
 
@@ -177,12 +197,12 @@ window.onload = function () {
         },
         onLeaveBack: () => {
           starVideo.pause();
-        }
-      }
+        },
+      },
     });
 
     star.to(".star__video", {
-      "--scaling-value": 4,
+      "--scaling-value": 5,
       duration: 1,
       ease: "none",
     });
@@ -196,7 +216,7 @@ window.onload = function () {
       onEnter: () => {
         animateText(".trailer .headline");
       },
-    })
+    });
     let mm = gsap.matchMedia();
     mm.add("(max-width: 999px)", () => {
       ScrollTrigger.create({
@@ -222,7 +242,7 @@ window.onload = function () {
           scrub: 1,
           anticipatePin: 1,
           invalidateOnRefresh: true,
-        }
+        },
       });
 
       trailerCover
@@ -233,16 +253,16 @@ window.onload = function () {
           clipPath: "inset(0px 10% round 20px)",
         })
         .to(".trailer__cover", {
-          height: 0,
-        })
-
-      const video = document.getElementById('bgVideo');
-      const texts = document.querySelectorAll('.trailer__video p');
+          height:0,
+        });
+      $(".trailer__video").removeClass("clip");
+      const video = document.getElementById("bgVideo");
+      const texts = document.querySelectorAll(".trailer__video p");
       const trailerVideo = gsap.timeline({
         scrollTrigger: {
-          trigger: '.trailer__video',
-          start: 'top top',
-          end: 'bottom bottom',
+          trigger: ".trailer__video",
+          start: "top top",
+          end: "bottom bottom",
           scrub: 10,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
@@ -253,8 +273,11 @@ window.onload = function () {
               video.currentTime = currentTime;
             }
 
-            texts.forEach(text => {
-              const [start, end] = text.getAttribute('data-scroll-video-time').split(',').map(Number);
+            texts.forEach((text) => {
+              const [start, end] = text
+                .getAttribute("data-scroll-video-time")
+                .split(",")
+                .map(Number);
               if (currentTime >= start && currentTime <= end) {
                 text.style.opacity = 1;
                 animateText(text);
@@ -264,20 +287,19 @@ window.onload = function () {
             });
           },
           onEnter: () => {
-            $('.trailer__video').removeClass('clip');
+            $(".trailer__video").removeClass("clip");
           },
           onLeave: () => {
-            $('.trailer__video').addClass('clip');
+            $(".trailer__video").addClass("clip");
           },
           onEnterBack: () => {
-            $('.trailer__video').removeClass('clip');
+            $(".trailer__video").removeClass("clip");
           },
           onLeaveBack: () => {
-            $('.trailer__video').addClass('clip');
-          }
-        }
+            $(".trailer__video").addClass("clip");
+          },
+        },
       });
-
     });
 
     function animateText(selector) {
@@ -310,13 +332,13 @@ window.onload = function () {
           stagger: 0.1, // 순차적으로 등장
           filter: "blur(0px)", // 블러 효과 제거
           duration: 1,
-          ease: "power3.out"
+          ease: "power3.out",
         }
       );
     }
 
     //swiper
-    const journalSwiper = new Swiper('.journal__swiper', {
+    const journalSwiper = new Swiper(".journal__swiper", {
       slidesPerView: 1.33,
       spaceBetween: 20,
       grabCursor: true, // 드래그 커서
@@ -326,11 +348,11 @@ window.onload = function () {
         },
         1000: {
           slidesPerView: 3.33,
-        }
+        },
       },
       pagination: {
-        el: '.journal .swiper-pagination',
-        type: 'progressbar',
+        el: ".journal .swiper-pagination",
+        type: "progressbar",
       },
     });
 
@@ -344,15 +366,11 @@ window.onload = function () {
         scrub: 0, // 스크롤에 따라 애니메이션 동기화
         markers: false,
         onUpdate: function (self) {
-          gsap.to(".footer__logo", { "--smooth-progress": self.progress })
+          gsap.to(".footer__logo", { "--smooth-progress": self.progress });
         },
-      }
+      },
     });
 
-    footer
-      .fromTo(".footer__logo",
-        { yPercent: 120 },
-        { yPercent: 0 }
-      )
-  });//loading
-};//onload
+    footer.fromTo(".footer__logo", { yPercent: 120 }, { yPercent: 0 });
+  }); //loading
+}; //onload

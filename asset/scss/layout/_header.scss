@@ -1,4 +1,7 @@
 // header
+.open {
+  transform: translate3d(0, -100%, 0);
+}
 
 .header {
   padding: $grid-gutter var(--grid-margin);
@@ -9,11 +12,19 @@
   height: $header-height;
   transition: color .3s cubic-bezier(0.165, 0.84, 0.44, 1);
   z-index: 210;
-  
+
+  .-close{
+    opacity: 0;;
+    visibility: hidden;
+  }
   @include responsive('t') {
     padding: $grid-gutter 1.1rem;
     top: 0;
     color: #fff;
+    .-close{
+      opacity: 1;
+      visibility: visible;
+    }
   }
 
   &__inner {
@@ -22,7 +33,8 @@
     padding: 0 .3125rem;
     width: 100%;
     height: 100%;
-    &::before{
+
+    &::before {
       content: '';
       position: absolute;
       top: 0;
@@ -31,57 +43,74 @@
       width: 100%;
       height: 100%;
       border-radius: var(--border-radius);
-      background-color: rgba(255,255,255,0.4);
+      background-color: rgba(255, 255, 255, 0.4);
       backdrop-filter: blur(45px);
-      transition: opacity .45s cubic-bezier(0.165, 0.84, 0.44, 1),transform .6s cubic-bezier(0.165, 0.84, 0.44, 1);
+      transition: opacity .45s cubic-bezier(0.165, 0.84, 0.44, 1), transform .6s cubic-bezier(0.165, 0.84, 0.44, 1);
+
       @include responsive('t') {
         opacity: 0;
         transform: scale3d(1.02, 1.2, 1);
       }
     }
+
     @include responsive('d') {
       padding: 0 .625rem;
     }
-
+    .menu.active:hover .menu-toggler_icon_item{
+      --icon-color:#fff;
+    }
     .menu {
       display: flex;
       align-items: center;
       position: relative;
+      z-index: 10;
+      &.active{
+        .menu-toggler_icon {
+          border-color: #000;
+        }
+        .menu-toggler_icon::before {
+          background-color: #000;
+        }
+      }
       &:hover {
         .menu-toggler_icon::before {
           transform: scale(1);
         }
-        .menu-toggler_icon_line::before{
-          background: #fff;
-          @include responsive('t'){
-            background: #000;
+
+        .menu-toggler_icon_item {
+          --icon-color: #fff;
+
+          @include responsive('t') {
+            --icon-color: #000;
           }
         }
-        .menu-toggler_label{
-          @include responsive('d'){
+
+        .menu-toggler_label {
+          @include responsive('d') {
             transform: translateX(-20px);
           }
         }
       }
+
       &-toggler {
         &_icon {
           width: 3.75rem;
           height: 3.75rem;
           position: relative;
-          display: flex;
-          justify-content: center;
-          align-items: center;
           overflow: hidden;
           border-radius: 100%;
+          @include flexbox;
+
           @include responsive('t') {
             width: 3.125rem;
-            height: 3.125rem
+            height: 3.125rem;
           }
+
           @include responsive('d') {
             border: 1px solid #fff;
           }
 
-          
+
 
           &::before {
             content: "";
@@ -94,43 +123,48 @@
             height: 100%;
             border-radius: 100%;
             transform: scale(0);
+
             @include responsive('t') {
               background: #fff;
             }
           }
 
           &_item {
-            position: relative;
-            z-index: 5;
-            @include column-flexbox(center);
+            @include column-flexbox;
             gap: 5px;
             width: 27px;
             height: 100%;
-            
-            &.-close {
-              .menu-toggler_icon_line{
-                --item-delay: 0.1s;
-                transform-origin: 50% 50%;
-                &:first-child{
-                  transform: rotate(50deg);
-                }
-                &:last-child{
-                  transform: rotate(-50deg);
-                }
-              }
-            }
-          }
+            --icon-color: #000;
 
-          &_line {
-            display: flex;
-            &::before{
+            @include responsive('t') {
+              --icon-color: #fff;
+            }
+
+            &::before,
+            &::after {
               content: '';
-              position: absolute;
+              position: relative;
+              z-index: 10;
+              display: block;
               width: 100%;
               height: 1px;
-              background: #000;
-              @include responsive('t') {
-                background: #fff;
+              background: var(--icon-color);
+            }
+
+            &.-close {
+              --icon-color: #000;
+              gap: 0;
+              &::before,
+              &::after {
+                transform-origin: 50% 50%;
+              }
+
+              &::before {
+                transform: rotate(45deg);
+              }
+
+              &::after {
+                transform: rotate(-45deg);
               }
             }
           }
@@ -151,6 +185,7 @@
 
           &_item {
             &.-close {
+              color: #000;
             }
           }
         }
@@ -176,13 +211,16 @@
       border-radius: var(--border-radius);
       z-index: 0;
       overflow: hidden;
-      @include responsive('t'){
+
+      @include responsive('t') {
         --border-radius: .4375rem;
         height: calc(100% - 1.25rem);
       }
-      @include responsive('d'){
+
+      @include responsive('d') {
         border: 1px solid #fff
       }
+
       &-title {
         @include flexbox;
         height: $button-height;
@@ -212,9 +250,11 @@
           position: absolute;
         }
       }
+
       &:hover {
         border: 0;
       }
+
       &:hover .link__reserve-inner {
         opacity: 1;
         transform: translateY(0);
@@ -296,6 +336,7 @@
       }
 
       @include responsive('t') {
+
         &.-right,
         &.-left {
           transform: translate(0, 0)
@@ -304,44 +345,52 @@
     }
   }
 
-  &.scroll{
+  &.scroll {
     color: #000;
-    .header__inner{
-      &::before{
+
+    .header__inner {
+      &::before {
         opacity: 1;
         transform: scale3d(1, 1, 1);
       }
     }
-    .header__logo{
+
+    .header__logo {
       &_letter {
         transform: translate(0, 100%);
       }
+
       &_symbol {
         &.-left {
           transform: scale(2) translate(260px, 76px);
         }
-  
+
         &.-right {
           transform: scale(2) translate(-248px, 76px);
         }
-  
+
       }
     }
-    .link__reserve{
+
+    .link__reserve {
       border-color: #000;
     }
-    .menu-toggler_icon{
+
+    .menu-toggler_icon {
       border-color: #000;
     }
-    .menu-toggler_icon_line::before{
-      background-color: #000;
+
+    .menu-toggler_icon_item {
+      --icon-color: #000;
     }
-    .menu:hover{
-      .menu-toggler_icon::before{
+
+    .menu:hover {
+      .menu-toggler_icon_item {
+        --icon-color: #fff;
+      }
+
+      .menu-toggler_icon::before {
         background: #000;
-      }
-      .menu-toggler_icon_line::before{
-        background-color: #fff;
       }
     }
   }
