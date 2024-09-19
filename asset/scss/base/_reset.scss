@@ -12,7 +12,7 @@ html{
 	@include responsive('d'){
 		font-size: 15px;
 	}
-	scroll-behavior: smooth;
+	// scroll-behavior: smooth;
 }
 
 @media (min-width: 1200px) and (max-width: 1599px) {

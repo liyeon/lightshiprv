@@ -1,6 +1,19 @@
 gsap.defaults({
   ease: "none",
 });
+const lenis = new Lenis()
+
+lenis.on('scroll', (e) => {
+  console.log(e)
+})
+
+lenis.on('scroll', ScrollTrigger.update)
+
+gsap.ticker.add((time)=>{
+  lenis.raf(time * 1000)
+})
+
+gsap.ticker.lagSmoothing(0)
 $('.menu-toggler_icon_item.-close').hide();
 
 window.onload = function () {
@@ -64,125 +77,221 @@ window.onload = function () {
       }
     });
     //star
-    let lastProgress = 0;
+
+
+    let lastScrollTop = 0;
+    let lastTime = Date.now();
+    let scrollTimeout; // 스크롤 멈춤 감지를 위한 타이머
+    
     const starShape = gsap.timeline({
       scrollTrigger: {
         trigger: ".star",
-        start: "top top",
+        start: "top 50%",
         end: "bottom bottom",
-        markers: false,
+        markers:true,
         scrub: 2,
         onUpdate: (self) => {
-          const currentProgress = self.progress;
-          console.log(currentProgress);
-          if (currentProgress > lastProgress) {
-            // console.log(`스크롤 위로`);
-            gsap.to(".star__shape-1", {
-              y: currentProgress + 40, // 잠깐 위로 이동
-              duration: currentProgress, // 이동 시간
-              ease: "power1.inOut",
-              onComplete: () => {
-                gsap.to(".star__shape-1", {
-                  y: 0, // 원래 위치로 돌아감
-                  duration: 0.1,
-                  ease: "power1.inOut",
-                });
-              },
-            });
-            gsap.to(".star__shape-2", {
-              y: currentProgress + 80, // 잠깐 위로 이동
-              duration: currentProgress, // 이동 시간
-              ease: "power1.inOut",
-              onComplete: () => {
-                gsap.to(".star__shape-2", {
-                  y: 0, // 원래 위치로 돌아감
-                  duration: 0.1,
-                  ease: "power1.inOut",
-                });
-              },
-            });
-            gsap.to(".star__shape-3", {
-              y: currentProgress + 120, // 잠깐 위로 이동
-              duration: currentProgress, // 이동 시간
-              ease: "power1.inOut",
-              onComplete: () => {
-                gsap.to(".star__shape-4", {
-                  y: 0, // 원래 위치로 돌아감
-                  duration: 0.1,
-                  ease: "power1.inOut",
-                });
-              },
-            });
-            gsap.to(".star__shape-4", {
-              y: currentProgress + 160, // 잠깐 위로 이동
-              duration: currentProgress, // 이동 시간
-              ease: "power1.inOut",
-              onComplete: () => {
-                gsap.to(".star__shape-3", {
-                  y: 0, // 원래 위치로 돌아감
-                  duration: 0.1,
-                  ease: "power1.inOut",
-                });
-              },
-            });
-          } else if (currentProgress < lastProgress) {
-            // console.log(`스크롤 위로`);
-            gsap.to(".star__shape-1", {
-              y: currentProgress + -40, // 잠깐 위로 이동
-              duration: currentProgress, // 이동 시간
-              ease: "power1.inOut",
-              onComplete: () => {
-                gsap.to(".star__shape-1", {
-                  y: 0, // 원래 위치로 돌아감
-                  duration: 0.1,
-                  ease: "power1.inOut",
-                });
-              },
-            });
-            gsap.to(".star__shape-2", {
-              y: currentProgress + -80, // 잠깐 위로 이동
-              duration: currentProgress, // 이동 시간
-              ease: "power1.inOut",
-              onComplete: () => {
-                gsap.to(".star__shape-2", {
-                  y: 0, // 원래 위치로 돌아감
-                  duration: 0.1,
-                  ease: "power1.inOut",
-                });
-              },
-            });
-            gsap.to(".star__shape-3", {
-              y: currentProgress + -120, // 잠깐 위로 이동
-              duration: currentProgress, // 이동 시간
-              ease: "power1.inOut",
-              onComplete: () => {
-                gsap.to(".star__shape-4", {
-                  y: 0, // 원래 위치로 돌아감
-                  duration: 0.1,
-                  ease: "power1.inOut",
-                });
-              },
-            });
-            gsap.to(".star__shape-4", {
-              y: currentProgress + -160, // 잠깐 위로 이동
-              duration: currentProgress, // 이동 시간
-              ease: "power1.inOut",
-              onComplete: () => {
-                gsap.to(".star__shape-3", {
-                  y: 0, // 원래 위치로 돌아감
-                  duration: 0.1,
-                  ease: "power1.inOut",
-                });
-              },
-            });
-          }
 
-          // 상태 업
-          lastProgress = currentProgress;
+
+          const currentScrollTop = self.scroll(); // 현재 스크롤 위치
+          const currentTime = Date.now(); // 현재 시간
+    
+          const deltaScroll = currentScrollTop - lastScrollTop; // 스크롤 위치 변화량
+          const deltaTime = currentTime - lastTime; // 시간 변화량
+    
+          const scrollSpeed = deltaScroll / deltaTime; // 스크롤 속도 계산
+    
+          // 스크롤 강도에 따른 y 값 설정
+          const moveDistance = scrollSpeed; // 속도에 따라 움직임의 크기 설정
+          console.log((moveDistance * 30) );
+          // 스크롤 중 y 값을 움직이기 (스크롤 방향에 따라)
+          gsap.to('.star__shape-1', {
+            y: (moveDistance * 30),
+            ease: "power1.out",
+            overwrite: true,
+            duration: 0.1,
+          });
+          gsap.to('.star__shape-2', {
+            y: (moveDistance * 50),
+            ease: "power1.out",
+            overwrite: true,
+            duration: 0.1,
+          });
+          gsap.to('.star__shape-3', {
+            y: (moveDistance * 70),
+            ease: "power1.out",
+            overwrite: true,
+            duration: 0.1,
+          });
+          gsap.to('.star__shape-4', {
+            y: (moveDistance * 90),
+            ease: "power1.out",
+            overwrite: true,
+            duration: 0.1,
+          });
+    
+          // 다음 프레임을 위해 값 업데이트
+          lastScrollTop = currentScrollTop;
+          lastTime = currentTime;
+    
+          // 스크롤 멈춤 감지: 일정 시간이 지나면 모든 star__shape를 y: 0으로
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(() => {
+            gsap.to('.star__shape-1, .star__shape-2, .star__shape-3, .star__shape-4', {
+              y: 0,
+              ease: "power1.out",
+              duration: 0.5 // 부드럽게 원래 위치로 돌아가도록 설정
+            });
+          }, 150); // 150ms 동안 스크롤이 없으면 y값을 0으로
         },
       },
     });
 
+    // let lastScrollTop2 = 0;
+    // let lastTime = Date.now();
+
+
+    // const starShape = gsap.timeline({
+    //   scrollTrigger: {
+    //     trigger: ".star",
+    //     start: "top top",
+    //     end: "bottom bottom",
+    //     markers: false,
+    //     scrub: 2,
+    //     onUpdate: (self) => {
+    //        const currentScrollTop = self.scroll(); // 현재 스크롤 위치
+    //     const currentTime = Date.now(); // 현재 시간
+
+    //     const deltaScroll = currentScrollTop - lastScrollTop2; // 스크롤 위치 변화량
+    //     const deltaTime = currentTime - lastTime; // 시간 변화량
+
+    //     const scrollSpeed = deltaScroll / deltaTime; // 스크롤 속도 계산
+
+    //     console.log("스크롤 속도: ", scrollSpeed);
+
+    //       move = gsap.timeline({})
+    //       move.to('.star__shape',{
+    //         y:???
+    //       })
+    //       move.to('.star__shape',{
+    //         y:0
+    //       })
+
+
+
+    //     // 다음 프레임을 위해 값 업데이트
+    //     lastScrollTop2 = currentScrollTop;
+    //     lastTime = currentTime;
+
+    //     },
+    //   },
+    // });
+
+
+          // if (currentProgress > lastProgress) {
+          //   // console.log(`스크롤 위로`);
+          //   gsap.to(".star__shape-1", {
+          //     y: currentProgress + 40, // 잠깐 위로 이동
+          //     duration: currentProgress, // 이동 시간
+          //     ease: "power1.inOut",
+          //     onComplete: () => {
+          //       gsap.to(".star__shape-1", {
+          //         y: 0, // 원래 위치로 돌아감
+          //         duration: 0.1,
+          //         ease: "power1.inOut",
+          //       });
+          //     },
+          //   });
+          //   gsap.to(".star__shape-2", {
+          //     y: currentProgress + 80, // 잠깐 위로 이동
+          //     duration: currentProgress, // 이동 시간
+          //     ease: "power1.inOut",
+          //     onComplete: () => {
+          //       gsap.to(".star__shape-2", {
+          //         y: 0, // 원래 위치로 돌아감
+          //         duration: 0.1,
+          //         ease: "power1.inOut",
+          //       });
+          //     },
+          //   });
+          //   gsap.to(".star__shape-3", {
+          //     y: currentProgress + 120, // 잠깐 위로 이동
+          //     duration: currentProgress, // 이동 시간
+          //     ease: "power1.inOut",
+          //     onComplete: () => {
+          //       gsap.to(".star__shape-4", {
+          //         y: 0, // 원래 위치로 돌아감
+          //         duration: 0.1,
+          //         ease: "power1.inOut",
+          //       });
+          //     },
+          //   });
+          //   gsap.to(".star__shape-4", {
+          //     y: currentProgress + 160, // 잠깐 위로 이동
+          //     duration: currentProgress, // 이동 시간
+          //     ease: "power1.inOut",
+          //     onComplete: () => {
+          //       gsap.to(".star__shape-3", {
+          //         y: 0, // 원래 위치로 돌아감
+          //         duration: 0.1,
+          //         ease: "power1.inOut",
+          //       });
+          //     },
+          //   });
+          // } else if (currentProgress < lastProgress) {
+          //   // console.log(`스크롤 위로`);
+          //   gsap.to(".star__shape-1", {
+          //     y: currentProgress + -40, // 잠깐 위로 이동
+          //     duration: currentProgress, // 이동 시간
+          //     ease: "power1.inOut",
+          //     onComplete: () => {
+          //       gsap.to(".star__shape-1", {
+          //         y: 0, // 원래 위치로 돌아감
+          //         duration: 0.1,
+          //         ease: "power1.inOut",
+          //       });
+          //     },
+          //   });
+          //   gsap.to(".star__shape-2", {
+          //     y: currentProgress + -80, // 잠깐 위로 이동
+          //     duration: currentProgress, // 이동 시간
+          //     ease: "power1.inOut",
+          //     onComplete: () => {
+          //       gsap.to(".star__shape-2", {
+          //         y: 0, // 원래 위치로 돌아감
+          //         duration: 0.1,
+          //         ease: "power1.inOut",
+          //       });
+          //     },
+          //   });
+          //   gsap.to(".star__shape-3", {
+          //     y: currentProgress + -120, // 잠깐 위로 이동
+          //     duration: currentProgress, // 이동 시간
+          //     ease: "power1.inOut",
+          //     onComplete: () => {
+          //       gsap.to(".star__shape-4", {
+          //         y: 0, // 원래 위치로 돌아감
+          //         duration: 0.1,
+          //         ease: "power1.inOut",
+          //       });
+          //     },
+          //   });
+          //   gsap.to(".star__shape-4", {
+          //     y: currentProgress + -160, // 잠깐 위로 이동
+          //     duration: currentProgress, // 이동 시간
+          //     ease: "power1.inOut",
+          //     onComplete: () => {
+          //       gsap.to(".star__shape-3", {
+          //         y: 0, // 원래 위치로 돌아감
+          //         duration: 0.1,
+          //         ease: "power1.inOut",
+          //       });
+          //     },
+          //   });
+          // }
+
+          // 상태 업
+          // lastProgress = currentProgress;
     const starVideo = document.getElementById("starVideo");
 
     const star = gsap.timeline({
@@ -206,7 +315,7 @@ window.onload = function () {
       duration: 1,
       ease: "none",
     });
-
+		const headTxt = new SplitType('.intro h2>span span', { types: 'words, chars', });
     //trailer
     // Split text into words and characters
     ScrollTrigger.create({
@@ -233,12 +342,34 @@ window.onload = function () {
       });
     });
     mm.add("(min-width: 1000px)", () => {
+			gsap.to(".trailer__video .content",{
+        scrollTrigger: {
+          trigger: ".trailer__video",
+          start: "0 50%",
+          end: "+=100%",
+          markers: true,
+          scrub: 1,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+				clipPath: "inset(0px 10% round 20px)",
+      });
+
+        // .to(".trailer__cover__wrap", {
+        //   clipPath: "inset(0px 0 round 0)",
+        // })
+        // .from(".trailer__cover__wrap", {
+        //   clipPath: "inset(0px 10% round 20px)",
+        // })
+        // .to(".trailer__cover", {
+        //   height:0,
+        // });
       const trailerCover = gsap.timeline({
         scrollTrigger: {
-          trigger: ".trailer__cover",
-          start: "top top",
-          end: "bottom bottom",
-          markers: false,
+          trigger: ".trailer__video .sticky__wrap",
+          start: "top 0",
+          end: "+=100%",
+          // markers: true,
           scrub: 1,
           anticipatePin: 1,
           invalidateOnRefresh: true,
@@ -246,22 +377,24 @@ window.onload = function () {
       });
 
       trailerCover
-        .to(".trailer__cover__wrap", {
-          clipPath: "inset(0px 0 round 0)",
-        })
-        .from(".trailer__cover__wrap", {
-          clipPath: "inset(0px 10% round 20px)",
-        })
-        .to(".trailer__cover", {
+        .to(".trailer .new", {
           height:0,
-        });
-      $(".trailer__video").removeClass("clip");
+        })
+        // .to(".trailer__cover__wrap", {
+        //   clipPath: "inset(0px 0 round 0)",
+        // })
+        // .from(".trailer__cover__wrap", {
+        //   clipPath: "inset(0px 10% round 20px)",
+        // })
+        // .to(".trailer__cover", {
+        //   height:0,
+        // });
       const video = document.getElementById("bgVideo");
       const texts = document.querySelectorAll(".trailer__video p");
       const trailerVideo = gsap.timeline({
         scrollTrigger: {
-          trigger: ".trailer__video",
-          start: "top top",
+          trigger: ".trailer__video .sticky__wrap",
+          start: "top -100%",
           end: "bottom bottom",
           scrub: 10,
           invalidateOnRefresh: true,
@@ -269,36 +402,32 @@ window.onload = function () {
             const scrollPercent = self.progress;
             const videoDuration = video.duration;
             const currentTime = scrollPercent * videoDuration;
-            if (currentTime) {
-              video.currentTime = currentTime;
-            }
+						a = currentTime.toFixed(1);
+            video.currentTime = currentTime;
+						// if(scrollPercent >= 0.9){
 
-            texts.forEach((text) => {
-              const [start, end] = text
-                .getAttribute("data-scroll-video-time")
-                .split(",")
-                .map(Number);
-              if (currentTime >= start && currentTime <= end) {
-                text.style.opacity = 1;
-                animateText(text);
-              } else {
-                text.style.opacity = 0;
-              }
-            });
-          },
-          onEnter: () => {
-            $(".trailer__video").removeClass("clip");
-          },
-          onLeave: () => {
-            $(".trailer__video").addClass("clip");
-          },
-          onEnterBack: () => {
-            $(".trailer__video").removeClass("clip");
-          },
-          onLeaveBack: () => {
-            $(".trailer__video").addClass("clip");
-          },
+						// }
+
+						if (condition) {
+							animateText(text);
+						} else {
+							
+						}
+            
+          // onEnter: () => {
+          //   $(".trailer__video").removeClass("clip");
+          // },
+          // onLeave: () => {
+          //   $(".trailer__video").addClass("clip");
+          // },
+          // onEnterBack: () => {
+          //   $(".trailer__video").removeClass("clip");
+          // },
+          // onLeaveBack: () => {
+          //   $(".trailer__video").addClass("clip");
+          // },
         },
+			}
       });
     });
 

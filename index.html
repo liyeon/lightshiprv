@@ -17,6 +17,9 @@
 	<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 	<!-- jquery -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<!-- lenis -->
+	<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script> 
+	<script src="./asset/js/split.type.js"></script> 
 	<!-- script -->
 	<script src="./asset/js/loading.js" defer></script>
 </head>
@@ -319,14 +322,17 @@
 			</section>
 			<section class="trailer">
 				<h2 class="headline">Introducing the aero electric L1 travel trailer.</h2>
-				<div class="trailer__cover">
+				<!-- <div class="trailer__cover">
 					<div class="sticky__wrap">
 						<div class="sticky">
 							<div class="trailer__cover__wrap"><img src="./asset/images/video-cover.jpg" alt></div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<div class="trailer__video">
+					<div class="new">
+						<div class="content"><img src="./asset/images/video-cover.jpg" alt></div>
+					</div>
 					<div class="sticky__wrap">
 						<div class="sticky">
 							<video id="bgVideo" muted>
@@ -415,7 +421,7 @@
 					</div>
 					<div class="swiper-pagination"></div>
 				</div>
-				<div class="journal__swiper">
+				<div class="journal__swiper swiper">
 					<div class="swiper-wrapper">
 						<a href="#" class="swiper-slide">
 							<div class="swiper-slide__thumb">

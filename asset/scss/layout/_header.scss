@@ -78,8 +78,11 @@
         }
 
         .menu-toggler_icon_item {
-          --icon-color: #fff;
-
+					--icon-color: #fff;
+					
+					.menu-toggler_icon_item.-close {
+						
+					}
           @include responsive('t') {
             --icon-color: #000;
           }
@@ -157,10 +160,11 @@
               &::before,
               &::after {
                 transform-origin: 50% 50%;
+								transform: rotate(0) scaleX(0);
               }
 
               &::before {
-                transform: rotate(45deg);
+                transform: rotate(45deg) scaleX(0);
               }
 
               &::after {
