@@ -67,6 +67,14 @@
       &.active{
         .menu-toggler_icon {
           border-color: #000;
+          &:has(.-close){
+            &::before{
+              content: none;
+              @include responsive('t'){
+                content: '';
+              }
+            }
+          }
         }
         .menu-toggler_icon::before {
           background-color: #000;
