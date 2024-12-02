@@ -289,17 +289,14 @@
     &:hover .sub-menu__item-rail{
         visibility: visible;
     }
-    &:hover .sub-menu__item-rail span{
-      animation: railHorizontal2 3s linear infinite;
+    &:hover .sub-menu__item-rail-wrap{
+      animation: railHorizontal 10s linear infinite;
     }
     &-rail {
       display: none;
-
       @include responsive('t') {
         visibility: hidden;
         display: flex;
-        flex-wrap: nowrap;
-        gap: 1rem;
         position: absolute;
         z-index: 10;
         top: 0;
@@ -313,14 +310,20 @@
         pointer-events: none;
         font-size: 2.3625rem;
         padding: 8px 0;
+        &-wrap{
+          display: flex;
+          flex-wrap: nowrap;
+          transform: translateX(-50%);
+          span {
+            white-space: nowrap;
+            margin-right: 1rem;
+          }
+        }
         @include responsive('d') {
           font-size: 3.375rem;
           padding: 15px 0;
         }
-        span {
-          white-space: nowrap;
 
-        }
       }
     }
 

@@ -92,8 +92,15 @@
     border-radius: var(--border-radius);
 
     &__wrap {
+      
+    }
+    &__item{
       animation: railHorizontal linear infinite;
-      animation-duration: 6s;
+      animation-duration: 3s;
+      display: flex;
+      span{
+        margin-right: 10px;
+      }
     }
   }
 
