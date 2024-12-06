@@ -109,6 +109,9 @@ main {
       grid-column: 8/11;
       grid-row: 9/13;
     }
+    @include responsive('m') {
+      width: 100%;
+    }
     &:hover {
       .btn-play {
         color: #fff;
