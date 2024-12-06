@@ -1941,6 +1941,11 @@ main .inner {
     grid-row: 9/13;
   }
 }
+@media (min-width: 500px) {
+  .intro__video {
+    width: 100%;
+  }
+}
 .intro__video:hover .btn-play {
   color: #fff;
 }
