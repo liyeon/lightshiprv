@@ -1922,6 +1922,7 @@ main .inner {
   cursor: pointer;
   -webkit-transition: 0.8s;
   transition: 0.8s;
+  width: 100%;
 }
 .intro__video .thumb {
   position: absolute;
@@ -1939,11 +1940,6 @@ main .inner {
   .intro__video {
     grid-column: 8/11;
     grid-row: 9/13;
-  }
-}
-@media (min-width: 500px) {
-  .intro__video {
-    width: 100%;
   }
 }
 .intro__video:hover .btn-play {

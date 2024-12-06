@@ -94,6 +94,7 @@ main {
     overflow: hidden;
     cursor: pointer;
     transition: .8s;
+    width: 100%;
     .thumb{
       position: absolute;
       bottom: 0;
@@ -108,9 +109,6 @@ main {
     @include responsive('t') {
       grid-column: 8/11;
       grid-row: 9/13;
-    }
-    @include responsive('m') {
-      width: 100%;
     }
     &:hover {
       .btn-play {
